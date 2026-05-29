@@ -65,11 +65,14 @@ export interface TaxonomyForest {
 export function resolveHierarchyEdge(rel: Relation): HierarchyEdge | null {
   const label = rel.label.trim();
 
-  // Explicit relationType takes priority
+  // Explicit relationType takes priority, but direction still depends on label.
+  // "classifies" / "has subtype" etc. mean from=parent → to=child (P2C).
+  // "is a kind of" / "extends" etc. mean from=child → to=parent (C2P, the default).
   if (rel.relationType === "generalization") {
+    const isP2C = GEN_P2C.test(label);
     return {
-      parentId: rel.to,
-      childId: rel.from,
+      parentId: isP2C ? rel.from : rel.to,
+      childId:  isP2C ? rel.to   : rel.from,
       family: "generalization",
       source: "explicit",
       originalRelId: rel.id,
@@ -77,9 +80,10 @@ export function resolveHierarchyEdge(rel: Relation): HierarchyEdge | null {
     };
   }
   if (rel.relationType === "realization") {
+    const isP2C = REA_P2C.test(label);
     return {
-      parentId: rel.to,
-      childId: rel.from,
+      parentId: isP2C ? rel.from : rel.to,
+      childId:  isP2C ? rel.to   : rel.from,
       family: "realization",
       source: "explicit",
       originalRelId: rel.id,
