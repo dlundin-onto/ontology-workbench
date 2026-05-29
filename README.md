@@ -21,9 +21,9 @@ Ontology Workbench is an open-source tool for building and reasoning about enter
 
 ## Quick start — zero install
 
-1. Download `ontology-workbench.html` from the [latest release](https://github.com/your-org/ontology-workbench/releases).
+1. Download `ontology-workbench.html` from the [latest release](https://github.com/dlundin-onto/ontology-workbench/releases/latest).
 2. Open it in any modern browser (Chrome, Firefox, Edge, Safari).
-3. Enter your [Anthropic API key](https://console.anthropic.com) when prompted.
+3. Enter your [Anthropic API key](https://console.anthropic.com) in Settings ⚙.
 4. Start modeling.
 
 Your API key is stored only in `sessionStorage` for the current tab. It is never sent anywhere except directly to `api.anthropic.com`.
@@ -33,7 +33,7 @@ Your API key is stored only in `sessionStorage` for the current tab. It is never
 **Prerequisites:** Node.js 18 or later
 
 ```bash
-git clone https://github.com/your-org/ontology-workbench.git
+git clone https://github.com/dlundin-onto/ontology-workbench.git
 cd ontology-workbench
 npm install
 npm run dev
